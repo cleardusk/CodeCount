@@ -5,4 +5,5 @@ This is a simple tool for source code analysis, such as counting the total lines
 **Examples:** 
 
 python count_lines.py ./src .cpp
+
 python count_lines.py ~/path/dir .h .hpp .c .cpp
