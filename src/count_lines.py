@@ -8,30 +8,35 @@ import os
 import sys
 from pprint import pprint
 
+
 def help():
-	print 'Usage: python count_lines.py dir_path suffix_names\n'
-	print 'Example: python count_lines.py ./src c cpp'
+    print 'Usage: python count_lines.py dir_path suffix_names\n'
+    print 'Example: python count_lines.py ./src c cpp'
+
 
 def count_lines(argv):
-	'''
-	argv[0]: the directory
-	argv[1:]: suffix names
-	return: total lines of code in the directory
-	'''
-	total_lines = 0
-	for file in os.listdir(argv[0]):
-		# print file
-		if file[file.rfind('.') + 1:] in argv[1:]:
-			file_path = os.path.join(argv[0], file)
-			with open(file_path) as f:
-				total_lines += 	f.read().count('\n')
+    '''
+    argv[0]: the directory
+    argv[1:]: suffix names
+    return: total lines of code in the directory
+    '''
 
-			## simple implemention
-			# f = open(file)
-			# scripts = f.read()
-			# total_lines = total_lines + scripts.count('\n')
-			# f.close()
-	return total_lines
+    total_lines = 0
+    for file in os.listdir(argv[0]):
+        # print file
+        if file[file.rfind('.') + 1:] in argv[1:]:
+            file_path = os.path.join(argv[0], file)
+            with open(file_path) as f:
+                total_lines += f.read().count('\n')
+
+            # simple implemention
+            # f = open(file)
+            # scripts = f.read()
+            # total_lines = total_lines + scripts.count('\n')
+            # f.close()
+
+    return total_lines
+
 
 def walk_dir(dr_path='.', files_container=[]):
     if os.path.isfile(dr_path):
@@ -42,38 +47,41 @@ def walk_dir(dr_path='.', files_container=[]):
     else:
         pass
 
+
 def count_lines_r(argv):
     '''
-	argv[0]: the directory
-	argv[1:]: suffix names
-	return: total lines of code in the directory
-	'''
+    argv[0]: the directory
+    argv[1:]: suffix names
+    return: total lines of code in the directory
+    '''
     files_container = []
     walk_dir(argv[0], files_container)
 
     total_lines = 0
     for fl_path in files_container:
-		if fl_path[fl_path.rfind('.') + 1:] in argv[1:]:
-			with open(fl_path) as f:
-				total_lines += 	f.read().count('\n')
+        if fl_path[fl_path.rfind('.') + 1:] in argv[1:]:
+            with open(fl_path) as f:
+                total_lines += f.read().count('\n')
 
     return total_lines
+
 
 def test():
     dr_stack = []
     walk_dir(dr_path='.', files_container=dr_stack)
     pprint(dr_stack)
 
+
 def main():
-	DEFAULT_SUFFIX_NAME = 'm'
-	if len(sys.argv) == 1:
-		help()
-	elif len(sys.argv) == 2:
-		sys.argv.append(DEFAULT_SUFFIX_NAME)
-		print count_lines_r(sys.argv[1:])  # sys.argv[0] is the file path
-	else:
-		print count_lines_r(sys.argv[1:])
+    DEFAULT_SUFFIX_NAME = 'm'
+    if len(sys.argv) == 1:
+        help()
+    elif len(sys.argv) == 2:
+        sys.argv.append(DEFAULT_SUFFIX_NAME)
+        print count_lines_r(sys.argv[1:])  # sys.argv[0] is the file path
+    else:
+        print count_lines_r(sys.argv[1:])
 
 if __name__ == '__main__':
-	main()
+    main()
     # test()
