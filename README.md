@@ -4,6 +4,15 @@ This is a simple tool for source code analysis, such as counting the total lines
 # Usage
 **Examples:** 
 
-python count_lines.py ./src .cpp
+```
+python count_lines.py ./src cpp
 
-python count_lines.py ~/path/dir .h .hpp .c .cpp
+python count_lines.py ~/path/dir h hpp c cpp
+
+$ python count_lines.py ~/Projects/caffe/ cpp c hpp h py m sh           
+177601
+```
+
+**Attention**
+
+The suffix name does not contain dot '.' .
