@@ -72,7 +72,7 @@ def test():
     pprint(dr_stack)
 
 
-def main():
+def main_console():
     DEFAULT_SUFFIX_NAME = 'm'
     if len(sys.argv) == 1:
         help()
@@ -82,6 +82,22 @@ def main():
     else:
         print count_lines_r(sys.argv[1:])
 
+
+def main(*args):
+    argv = []
+    for arg in args:
+        argv.append(arg)
+    DEFAULT_SUFFIX_NAME = 'm'
+
+    if len(argv) == 0:
+        help()
+    elif len(argv) == 1:
+        argv.append(DEFAULT_SUFFIX_NAME)
+        print count_lines_r(argv)
+    else:
+        print count_lines_r(argv)
+
 if __name__ == '__main__':
-    main()
+    # main_console()
+    main('.')
     # test()
