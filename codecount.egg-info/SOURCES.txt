@@ -1,0 +1,6 @@
+count_lines.py
+setup.py
+codecount.egg-info/PKG-INFO
+codecount.egg-info/SOURCES.txt
+codecount.egg-info/dependency_links.txt
+codecount.egg-info/top_level.txt
