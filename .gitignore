@@ -1,4 +1,4 @@
-./bak
-./build
-./dist
-./*.egg-info
+./bak/*
+./build/*
+./dist/*
+./*.egg-info/*
