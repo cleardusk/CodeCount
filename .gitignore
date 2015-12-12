@@ -2,3 +2,4 @@
 ./build
 ./dist
 ./codecount.egg-info
+./*.pyc
