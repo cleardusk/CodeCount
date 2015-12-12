@@ -16,3 +16,20 @@ $ python count_lines.py ~/Projects/caffe/ cpp c hpp h py m sh
 **Attention**
 
 The suffix name does not contain dot '.' .
+
+**Module installation and usage**
+
+Installation is easy, just type
+
+```
+$ python set_up.py install
+```
+
+And the example to use the module
+
+```
+>>> import count_lines
+>>> count_lines.main('/home/gjz/Projects/caffe','cpp', 'c', 'h', 'hpp', 'm', 'sh')
+149473
+```
+
