@@ -73,21 +73,20 @@ def test():
 
 
 def main_console():
-    DEFAULT_SUFFIX_NAME = 'm'
+    DEFAULT_SUFFIX_NAME = 'py'
     if len(sys.argv) == 1:
         help()
+        return
     elif len(sys.argv) == 2:
         sys.argv.append(DEFAULT_SUFFIX_NAME)
-        print count_lines_r(sys.argv[1:])  # sys.argv[0] is the file path
-    else:
-        print count_lines_r(sys.argv[1:])
+    sys.argv[1] = os.path.expanduser(sys.argv[1])
+    print count_lines_r(sys.argv[1:])
 
 
 def main(*args):
     argv = []
-    for arg in args:
-        argv.append(arg)
-    DEFAULT_SUFFIX_NAME = 'm'
+    argv.extend(args)
+    DEFAULT_SUFFIX_NAME = 'py'
 
     if len(argv) == 0:
         help()
@@ -99,5 +98,6 @@ def main(*args):
 
 if __name__ == '__main__':
     # main_console()
-    main('.')
+    # main('.')
+    main_console()
     # test()
