@@ -14,6 +14,7 @@ class CodeCount(object):
     """docstring for CodeCount"""
     def __init__(self):
         self.files_container = []  # store all the valid files path
+        self.DEFAULT_SUFFIX_NAME = ['py', 'h', 'cpp', 'm']
 
     def help():
         print 'Usage: python count_lines.py dir_path suffix_names\n'
@@ -81,16 +82,30 @@ class CodeCount(object):
 
 def main_console():
     codecount = CodeCount()
-    DEFAULT_SUFFIX_NAME = 'py'
 
     if len(sys.argv) == 1:
         help()
         return
     elif len(sys.argv) == 2:
-        sys.argv.append(DEFAULT_SUFFIX_NAME)
+        sys.argv.extend(codecount.DEFAULT_SUFFIX_NAME)
     sys.argv[1] = os.path.expanduser(sys.argv[1])
 
     codecount.count_lines_r(sys.argv[1:])
+
+
+def main(*argv):
+    """for test, the implemention is a little different from main_console"""
+    argv = [ar for ar in argv]
+    codecount = CodeCount()
+
+    if len(argv) == 0:
+        help()
+        return
+    elif len(argv) == 1:
+        argv.extend(codecount.DEFAULT_SUFFIX_NAME)
+    argv[0] = os.path.expanduser(argv[0])
+
+    codecount.count_lines_r(argv[0:])
 
 if __name__ == '__main__':
     main_console()
