@@ -24,6 +24,6 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     entry_points={
-        'console_scripts': 'code-count=code_count.count_lines:main_console'
+        'console_scripts': 'code-count=code_count.code_count:main_console'
     }
 )
