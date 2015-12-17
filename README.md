@@ -47,3 +47,12 @@ cpp  :   47320
 m    :     910
 total:  161328
 ```
+
+# UPDATE LOG
+12.17
+Add -c option, return the total code lines in current directory, it's experimental now.
+
+Example usage:
+```
+code-count -c .
+```

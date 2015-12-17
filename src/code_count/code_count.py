@@ -14,7 +14,7 @@ class CodeCount(object):
     """docstring for CodeCount"""
     def __init__(self):
         self.files_container = []  # store all the valid files path
-        self.DEFAULT_SUFFIX_NAME = ['py', 'h', 'cpp', 'm']
+        self.DEFAULT_SUFFIX_NAME = ['py', 'hpp', 'h', 'c', 'cpp', 'm']
 
     def help():
         print 'Usage: python count_lines.py dir_path suffix_names\n'
@@ -47,7 +47,7 @@ class CodeCount(object):
                 with open(file_path) as f:
                     total_lines += f.read().count('\n')
 
-        return total_lines
+        print 'Total lines: %d' % total_lines
 
     def count_lines_r(self, arg):
         '''
@@ -80,17 +80,43 @@ class CodeCount(object):
         print '{0:5}: {1:7d}'.format('total', total_lines)
 
 
-def main_console():
-    codecount = CodeCount()
+def main_console(*argv):
+    """IF argv is None(length is 0), it use sys.argv for CLI,
+    ELSE, its use is for test"""
+    if len(argv) is 0:
+        argv = sys.argv[1:]  # remove filename, the first parameter
+    else:
+        argv = [ar for ar in argv]
+        # print argv
 
-    if len(sys.argv) == 1:
+    if len(argv) == 0:
         help()
         return
-    elif len(sys.argv) == 2:
-        sys.argv.extend(codecount.DEFAULT_SUFFIX_NAME)
-    sys.argv[1] = os.path.expanduser(sys.argv[1])
 
-    codecount.count_lines_r(sys.argv[1:])
+    codecount = CodeCount()  # instance
+
+    option_cur_dir = '-c'  # -r option: current directory
+    option_cur_dir_bool = False
+    if argv[0] == option_cur_dir:
+        # print 'here'
+        option_cur_dir_bool = True
+        argv.pop(0)
+        # print 'after pop', argv
+
+    if len(argv) == 1:
+        # default mode
+        argv.extend(codecount.DEFAULT_SUFFIX_NAME)
+        argv[0] = os.path.expanduser(argv[0])
+        if option_cur_dir_bool:
+            # print 'here'
+            codecount.count_lines(argv)
+        else:
+            codecount.count_lines_r(argv)
+    else:
+        if option_cur_dir_bool:
+            codecount.count_lines(argv)
+        else:
+            codecount.count_lines_r(argv)
 
 
 def main(*argv):
